@@ -1,4 +1,5 @@
 'use strict';
+var NAMBER_OF_WIZARDS = 4;
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
@@ -15,68 +16,26 @@ var wizardSurnames = ['да Марья', 'Верон', 'Мирабелла', 'В
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var getRandomWizardName = function () {
-  for (var i = wizardNames.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var wizardName = wizardNames[i];
-    wizardNames[i] = wizardNames[j];
-    wizardNames[j] = wizardName;
-  }
-  return wizardName;
+var randomInteger = function (min, max) {
+  return Math.floor(min + Math.random() * (max + 1 - min));
 };
 
-var getRandomWizardSurname = function () {
-  for (var i = wizardSurnames.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var wizardSurname = wizardSurnames[i];
-    wizardSurnames[i] = wizardSurnames[j];
-    wizardSurnames[j] = wizardSurname;
+var getObject = function (numberOfWizards) {
+  var wizards = [];
+  for (var i = 0; i < numberOfWizards; i++) {
+    wizards.push(
+        {
+          name: wizardNames[randomInteger(0, 7)] + ' ' + wizardSurnames[randomInteger(0, 7)],
+          coatColor: coatColors[randomInteger(0, 5)],
+          eyesColor: eyesColors[randomInteger(0, 4)]
+        }
+    );
   }
-  return wizardSurname;
+
+  return wizards;
 };
 
-var getRandomWizardCoatColor = function () {
-  for (var i = coatColors.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var wizardCoatColor = coatColors[i];
-    coatColors[i] = coatColors[j];
-    coatColors[j] = wizardCoatColor;
-  }
-  return wizardCoatColor;
-};
-
-var getRandomWizardEyesColor = function () {
-  for (var i = eyesColors.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var wizardEyesColor = eyesColors[i];
-    eyesColors[i] = eyesColors[j];
-    eyesColors[j] = wizardEyesColor;
-  }
-  return wizardEyesColor;
-};
-
-var wizards = [
-  {
-    name: getRandomWizardName() + ' ' + getRandomWizardSurname(),
-    coatColor: getRandomWizardCoatColor(),
-    eyesColor: getRandomWizardEyesColor()
-  },
-  {
-    name: getRandomWizardName() + ' ' + getRandomWizardSurname(),
-    coatColor: getRandomWizardCoatColor(),
-    eyesColor: getRandomWizardEyesColor()
-  },
-  {
-    name: getRandomWizardName() + ' ' + getRandomWizardSurname(),
-    coatColor: getRandomWizardCoatColor(),
-    eyesColor: getRandomWizardEyesColor()
-  },
-  {
-    name: getRandomWizardName() + ' ' + getRandomWizardSurname(),
-    coatColor: getRandomWizardCoatColor(),
-    eyesColor: getRandomWizardEyesColor()
-  }
-];
+var wizards = getObject(NAMBER_OF_WIZARDS);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
