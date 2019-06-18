@@ -2,7 +2,16 @@
 var NUMBER_OF_WIZARDS = 4;
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var openUserDialog = document.querySelector('.setup-open');
+var closeUserDialog = document.querySelector('.setup-close');
+
+openUserDialog.addEventListener('click', function () {
+  userDialog.classList.remove('hidden');
+});
+
+closeUserDialog.addEventListener('click', function () {
+  userDialog.classList.add('hidden');
+});
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
