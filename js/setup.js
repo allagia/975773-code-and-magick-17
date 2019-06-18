@@ -1,5 +1,5 @@
 'use strict';
-var NAMBER_OF_WIZARDS = 4;
+var NUMBER_OF_WIZARDS = 4;
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
@@ -20,7 +20,7 @@ var randomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
 
-var getObject = function (numberOfWizards) {
+var getWizardsArray = function (numberOfWizards) {
   var wizards = [];
   for (var i = 0; i < numberOfWizards; i++) {
     wizards.push(
@@ -35,7 +35,7 @@ var getObject = function (numberOfWizards) {
   return wizards;
 };
 
-var wizards = getObject(NAMBER_OF_WIZARDS);
+var wizards = getWizardsArray(NUMBER_OF_WIZARDS);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
