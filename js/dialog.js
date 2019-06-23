@@ -11,28 +11,40 @@
   var dialogHandler = userDialog.querySelector('.upload');
 
   /* Управление открытием/ закрытием окна пользователя*/
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+      userDialog.style.top = '';
+      userDialog.style.left = '';
+    }
+  };
+
   var openPopup = function () {
     userDialog.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEscPress);
   };
 
   var closePopup = function () {
     userDialog.classList.add('hidden');
-  };
-
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      closePopup();
-    }
+    document.removeEventListener('keydown', onPopupEscPress);
   };
 
   openUserDialog.addEventListener('click', openPopup);
 
-  closeUserDialog.addEventListener('click', closePopup);
+  closeUserDialog.addEventListener('click', function () {
+    closePopup();
+
+    userDialog.style.top = '';
+    userDialog.style.left = '';
+  });
 
   closeUserDialog.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       closePopup();
     }
+
+    userDialog.style.top = '';
+    userDialog.style.left = '';
   });
 
   setupOpenIcon.addEventListener('keydown', function (evt) {
@@ -40,8 +52,6 @@
       openPopup();
     }
   });
-
-  document.addEventListener('keydown', onPopupEscPress);
 
   setupUserName.addEventListener('focus', function () {
     document.removeEventListener('keydown', onPopupEscPress);
